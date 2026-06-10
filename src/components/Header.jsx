@@ -47,8 +47,10 @@ export default function Header() {
             whileTap={{ scale: 0.9 }}
             style={{ position: 'relative' }}
             title={state.notificationsEnabled ? 'Notifications enabled' : 'Enable notifications'}
+            aria-label={state.notificationsEnabled ? 'Notifications enabled' : 'Enable notifications'}
+            aria-pressed={state.notificationsEnabled}
           >
-            <Bell size={20} />
+            <Bell size={20} aria-hidden="true" />
             <AnimatePresence>
               {unreadCount > 0 && (
                 <motion.div
@@ -69,6 +71,7 @@ export default function Header() {
             whileTap={{ scale: 0.9 }}
             title={state.theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
             aria-label="Toggle dark mode"
+            aria-pressed={state.theme === 'dark'}
             id="theme-toggle"
           >
             <AnimatePresence mode="wait" initial={false}>
@@ -80,7 +83,7 @@ export default function Header() {
                   exit={{ rotate: 90, opacity: 0 }}
                   transition={{ duration: 0.2 }}
                 >
-                  <Moon size={18} />
+                  <Moon size={18} aria-hidden="true" />
                 </motion.div>
               ) : (
                 <motion.div
@@ -90,7 +93,7 @@ export default function Header() {
                   exit={{ rotate: -90, opacity: 0 }}
                   transition={{ duration: 0.2 }}
                 >
-                  <Sun size={18} />
+                  <Sun size={18} aria-hidden="true" />
                 </motion.div>
               )}
             </AnimatePresence>

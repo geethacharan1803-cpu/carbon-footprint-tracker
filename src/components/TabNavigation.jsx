@@ -36,7 +36,7 @@ export default function TabNavigation() {
                 transition={{ type: 'spring', stiffness: 500, damping: 35 }}
               />
             )}
-            <Icon size={16} style={{ position: 'relative', zIndex: 1 }} />
+            <Icon size={16} style={{ position: 'relative', zIndex: 1 }} aria-hidden="true" />
             <span style={{ position: 'relative', zIndex: 1 }}>{tab.label}</span>
           </button>
         );

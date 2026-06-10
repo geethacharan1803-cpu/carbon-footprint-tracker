@@ -146,10 +146,12 @@ export default function Sage() {
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 title={ttsEnabled ? 'Disable text-to-speech' : 'Enable text-to-speech'}
+                aria-label={ttsEnabled ? 'Disable text-to-speech' : 'Enable text-to-speech'}
+                aria-pressed={ttsEnabled}
                 id="sage-tts-toggle"
                 style={{ color: '#fff' }}
               >
-                {ttsEnabled ? <Volume2 size={18} /> : <VolumeX size={18} />}
+                {ttsEnabled ? <Volume2 size={18} aria-hidden="true" /> : <VolumeX size={18} aria-hidden="true" />}
               </motion.button>
             </div>
 
@@ -181,6 +183,7 @@ export default function Sage() {
                       onClick={() => speak(msg.text)}
                       style={{ marginLeft: 8, opacity: 0.6, fontSize: 12 }}
                       title="Read aloud"
+                      aria-label="Read message aloud"
                     >
                       🔊
                     </button>
@@ -193,11 +196,11 @@ export default function Sage() {
                 <div className="flex items-center justify-between" style={{ marginBottom: 'var(--space-sm)' }}>
                   <span className="text-xs text-semibold text-secondary">💡 Actionable Tips</span>
                   <div className="flex gap-xs">
-                    <button className="btn-icon btn-ghost" onClick={() => scrollCarousel(-1)} disabled={currentTipIndex === 0}>
-                      <ChevronLeft size={14} />
+                    <button className="btn-icon btn-ghost" onClick={() => scrollCarousel(-1)} disabled={currentTipIndex === 0} aria-label="Previous tip">
+                      <ChevronLeft size={14} aria-hidden="true" />
                     </button>
-                    <button className="btn-icon btn-ghost" onClick={() => scrollCarousel(1)} disabled={currentTipIndex >= personalizedTips.length - 1}>
-                      <ChevronRight size={14} />
+                    <button className="btn-icon btn-ghost" onClick={() => scrollCarousel(1)} disabled={currentTipIndex >= personalizedTips.length - 1} aria-label="Next tip">
+                      <ChevronRight size={14} aria-hidden="true" />
                     </button>
                   </div>
                 </div>
@@ -233,15 +236,18 @@ export default function Sage() {
                 </div>
                 <div className="flex justify-center gap-xs" style={{ marginTop: 'var(--space-sm)' }}>
                   {personalizedTips.slice(0, 8).map((_, i) => (
-                    <div
+                    <button
                       key={i}
                       style={{
                         width: 6, height: 6, borderRadius: '50%',
+                        border: 'none', padding: 0,
                         background: i === currentTipIndex ? 'var(--accent-green)' : 'var(--border-color)',
                         transition: 'background 0.3s',
                         cursor: 'pointer',
                       }}
                       onClick={() => setCurrentTipIndex(i)}
+                      aria-label={`Go to tip ${i + 1}`}
+                      aria-pressed={i === currentTipIndex}
                     />
                   ))}
                 </div>
